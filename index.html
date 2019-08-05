@@ -65,6 +65,10 @@
             background-color: DodgerBlue !important;
             color: #ffffff;
         }
+
+        img {
+            display: block;
+        }
     </style>
 </head>
 
@@ -72,7 +76,9 @@
     <div class="autocomplete" style="width:300px;">
         <input id="myInput" type="text" name="myCountry" placeholder="Country">
     </div>
+
     <button onclick="search()" type="submit">Search</button>
+    <img id="image">
     <script>
         function httpGetAsync(theUrl) {
             console.log(theUrl);
@@ -87,28 +93,42 @@
             xmlHttp.open("GET", theUrl, true); // true for asynchronous 
             xmlHttp.send(null);
         }
-        function search() {
-            let s = inp.value
-            let url = "https://danbooru.donmai.us/posts?page=1&tags=" + s.trim().split(' ').join('_')
+        function search(pageback = 0) {
+            searchexeccheck = true;
+            imgno = 0
+            let retvalue = [pageback]
+            var s = inp.value
+            let url = "https://danbooru.donmai.us/posts?page=" + pageno + "&tags=" + s.trim().split(' ').join('_')
             console.log(url)
             const promise = new Promise(function (resolve, reject) {
                 console.log(url);
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function () {
                     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                        resolve(xmlHttp.responseText);
+                        retvalue.push(xmlHttp.responseText);
+                        resolve(retvalue);
                     }
                 }
                 xmlHttp.open("GET", url, true); // true for asynchronous 
                 xmlHttp.send(null);
             })
-            promise.then(function(res){
-                var page = res;
-                console.log("aaya - " + res);
+            promise.then(function (res) {
                 var domparser = new DOMParser()
-                var doc = domparser.parseFromString(page, "text/html")
-                console.log(doc.body)
-            })
+                page = domparser.parseFromString(res[1], "text/html")
+                firstpage = parseInt(page.getElementsByClassName("current-page")[0].firstChild.innerHTML)
+                let temp = page.getElementsByClassName("numbered-page");
+                lastpage = parseInt(temp[temp.length - 1].firstChild.innerHTML)
+                lastimage = page.getElementsByTagName("article").length - 1
+                if(res[0] == -1){
+                    imgno = lastimage;
+                }
+                else{
+                    imgno = 0
+                }
+                loadImage(page)
+                console.log(res)
+
+            });
         }
         function addActive(x) {
             /*a function to classify an item as "active":*/
@@ -208,6 +228,57 @@
         /*execute a function when someone clicks in the document:*/
         document.addEventListener("click", function (e) {
             closeAllLists(e.target);
+        });
+        function loadImage(html) {
+            var _img = document.getElementById('image');
+            var newImg = new Image;
+            newImg.onload = function () {
+                _img.src = this.src;
+            }
+            _img.src = html.getElementsByTagName("article")[imgno].getAttribute('data-file-url');
+        }
+        var pageno = 1
+        var imgno = 0
+        var lastpage
+        var lastimage
+        var firstpage
+        var page
+        var searchexeccheck = false
+        document.addEventListener("keydown", function (event) {
+            if (searchexeccheck == true) {
+                let key = event.key;
+                switch (key) {
+                    case "ArrowLeft":
+                        console.log(imgno)
+                        if (imgno > 0) {
+                            imgno--
+                            loadImage(page)
+                            console.log("laya image", imgno, pageno)
+                        }
+                        else if (pageno > 1) {
+                            pageno--
+                            search(-1)
+                        }
+                        else {
+                            window.alert("reached first page first image")
+                        }
+                        break;
+                    case "ArrowRight":
+                        if (imgno < lastimage) {
+                            imgno++
+                            loadImage(page)
+                            console.log("laya image", imgno, pageno)
+                        }
+                        else if (pageno < lastpage) {
+                            pageno++
+                            search()
+                        }
+                        else {
+                            window.alert("reached last page last image")
+                        }
+                        break;
+                }
+            }
         });
     </script>
 </body>
