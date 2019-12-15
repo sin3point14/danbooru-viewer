@@ -14,7 +14,7 @@ An image board consisting of pretty muchh all anime/manga/light novels related a
 
 ## Usage-
 
-Download the index.html from the Release Page and open it in your favourite browser  
+Download the latest release- [index.html](https://github.com/sin3point14/danbooru-viewer/releases/download/v1.0/index.html) and open it in your favourite browser  
 OR  
 Go to https://sin3point14.github.io/danbooru-viewer/  
 
@@ -45,9 +45,12 @@ __NOTE__: Last Page will diaplay incorrect for tags with hell lot of images, aga
 Don't.  
 The codebase is a nightmare of CSS, JS, Bootstrap currently with snippets from all over the internet bound by very fragile code.  
 I had a ( ͡° ͜ʖ ͡°) impulse and then built it, what else could you expect?  
+Though I do have plans to clean up this project and implement Vue.js while learning it  
 Unless, you are a masochist, then feel free to make my life easier by opening up a pull request  
 
 ## Milestones
+
+- [ ] add support for other booru based sites like [Gelbooru](https://gelbooru.com/)
 
 - [ ] Load multiple low res images at once(somewhat like google images) using-
 
