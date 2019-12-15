@@ -29,7 +29,7 @@ Left/Right swipe to go to next/previous image
 Control `Current Image No` and `Current Page No` using the UI  
 They correspond to-
 
-![Monogatari variables explaination](/images/usage1.PNG)
+![Monogatari variables explaination](/images/usage1.png)
 
 __Tip__: Try putting some random numbers in the `Current Page no`(within limits please, as I have not implemented proper error-checking) for a brand new ( ͡° ͜ʖ ͡°) experiences everytime
 
