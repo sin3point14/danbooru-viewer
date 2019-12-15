@@ -1,10 +1,13 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         Danbooru-Viewer
     </title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         * {
             box-sizing: border-box;
@@ -29,7 +32,6 @@
 
         input[type=text] {
             background-color: #f1f1f1;
-            width: 300px;
         }
 
         input[type=submit] {
@@ -72,19 +74,65 @@
             max-height: 100vh;
             max-width: 100vw;
         }
+
+        #expt {
+            position: fixed;
+            width: 100%;
+        }
     </style>
 </head>
 
 <body>
-    <div class="autocomplete" style="width:300px;">
-        <input id="myInput" type="text" name="myCountry" placeholder="enter tag here">
-    </div>
 
-    <button onclick="pre_search()" type="submit">Search</button>
-<span>Last Page No- <span id = 'lastpage'>unset</span>; Last Image No- <span id = 'lastimage'>unset</span></span>
-<input type="text" id = 'pageno' value="1">
-<input type="text" id = 'imgno' value="0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+                <!--<li class="nav-item">
+                    <div class="autocomplete" style="width:300px;">
+                        <input class="form-control" id="myInput" type="text" name="myCountry" placeholder="enter tag here">
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-success ml-2" onclick="pre_search()" type="submit">Search</button>
+                </li>-->
+
+                <li class="nav-item">
+                    <span class='nav-link'>Total Images- <span id='totalimages'>unset</span></span>
+                </li>
+                <li class="nav-item">
+                    <span class='nav-link'>Last Page No- <span id='lastpage'>unset</span></span>
+                </li>
+                <li class="nav-item">
+                    <span class='nav-link'>Last Image No- <span id='lastimage'>unset</span></span>
+                </li>
+                <li class="nav-item">
+                    <div class="form-inline my-2 my-lg-0">
+                        <span class='nav-link mr-2'>Current Page no-</span>
+                        <input class="form-control mr-sm-2" style="width: 50px;" type="text" id='pageno' value="1">
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="form-inline my-2 my-lg-0">
+                        <span class='nav-link mr-2'>Current Image no-</span>
+                        <input class="form-control mr-sm-2" style="width: 50px;" type="text" id='imgno' value="0">
+                    </div>
+                </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0">
+                <span class="autocomplete">
+                    <input class="form-control" id="myInput" type="text" name="myCountry"
+                        placeholder="enter tag here">
+                </span>
+                <button class="btn btn-outline-success ml-2" onclick="pre_search()" type="submit">Search</button>
+
+            </div>
+    </nav>
 
     <img id="image">
     <script>
@@ -186,10 +234,13 @@
                 b.innerHTML += arr[i].name.substr(val.length) + " - " + arr[i].post_count;
                 /*insert a input field that will hold the current array item's value:*/
                 b.innerHTML += "<input type='hidden' value='" + arr[i].name + "'>";
+                b.innerHTML += "<input type='hidden' value='" + arr[i].post_count + "'>";
                 /*execute a function when someone clicks on the item value (DIV element):*/
                 b.addEventListener("click", function (e) {
                     /*insert the value for the autocomplete text field:*/
                     inp.value = this.getElementsByTagName("input")[0].value;
+                    totalimages = this.getElementsByTagName("input")[1].value
+                    console.log(totalimages)
                     /*close the list of autocompleted values,
                     (or any other open lists of autocompleted values:*/
                     closeAllLists();
@@ -238,7 +289,8 @@
             closeAllLists(e.target);
         });
 
-        function pre_search(){
+        function pre_search() {
+            document.getElementById("totalimages").innerHTML = totalimages
             update_numbers()
             search()
         }
@@ -260,28 +312,25 @@
         var lastimage
         var firstpage
         var page
+        var totalimages
         var searchexeccheck = false
 
-        function update_numbers(update_value){
+        function update_numbers(update_value) {
             let temp_imgno = parseInt(document.getElementById('imgno').value)
             let temp_pageno = parseInt(document.getElementById('pageno').value)
-            console.log(temp_pageno, temp_imgno, pageno, imgno) 
-            if(isNaN(temp_imgno))
-            {
+            console.log(temp_pageno, temp_imgno, pageno, imgno)
+            if (isNaN(temp_imgno)) {
                 window.alert('image no is not a number')
                 return
             }
-            if(isNaN(temp_pageno))
-            {
+            if (isNaN(temp_pageno)) {
                 window.alert('page no is not a number')
                 return
             }
-            if(temp_imgno != imgno)
-            {
+            if (temp_imgno != imgno) {
                 imgno = temp_imgno
             }
-            if(temp_pageno != pageno)
-            {
+            if (temp_pageno != pageno) {
                 pageno = temp_pageno
             }
             console.log(temp_pageno, temp_imgno, pageno, imgno)
@@ -378,6 +427,16 @@
             yDown = null;
         };
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
