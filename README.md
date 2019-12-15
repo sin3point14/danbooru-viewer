@@ -4,7 +4,7 @@
 ![Monogatari Sample](/images/sample2.PNG)
 
 
-A single page website that scrapes pages from https://danbooru.donmai.us/ according to a tag and allows you to view the full-sized images one by one with simple controls
+A single page website that scrapes pages from (Danbooru)[https://danbooru.donmai.us/] according to a tag and allows you to view the full-sized images one by one with simple controls that I built on a ( ͡° ͜ʖ ͡°) impulse
 
 Meant to be used for various ( ͡° ͜ʖ ͡°) purposes
 
@@ -26,12 +26,28 @@ Left/Right swipe to go to next/previous image
 
 Page number(of the corresponding page on danbooru of the image, format- https://danbooru.donmai.us/posts?page=PAGENO&tags=CURRENTTAG) and Image number(0 indexed image number of the current image on the correspoinding page on danbooru) can be directly controlled from the interface provided in the navbar so you don't have to start from the same image everytime.
 
-__Tip__: Try putting some random numbers in the PageNo(within limits please, as I have not implemented proper error-checking) for a brand new ( ͡° ͜ʖ ͡°) experiences everytime
+__Tip__: Try putting some random numbers in the `Current Page no`(within limits please, as I have not implemented proper error-checking) for a brand new ( ͡° ͜ʖ ͡°) experiences everytime
 
 __NOTE__: `Current Image no` will reset evrytime you press `Search`, it's a bug, I will fix that soon
 __NOTE__: Last Page will diaplay incorrect for tags with hell lot of images, again a bug, will look for a workaround soon
 
-Screenshots-
+## Wanna Contribute?
+
+Don't.
+The codebase is a nightmare of CSS, JS, Bootstrap currently with snippets from all over the internet bound by very fragile code.
+I had a ( ͡° ͜ʖ ͡°) impulse and then built it, what else could you expect?
+Unless, you are a masochist, then feel free to make my life easier by opening up a pull request 
+
+## Milestones
+
+- [ ] Load multiple low res images at once(somewhat like google images) using-
+
+![Danbooru inspect element](/images/goal1.PNG)
+(^ source for an image preview on Danbooru home page)
+
+- [ ] shift to Vue.js to escape vanilla hell
+
+## Screenshots-
 
 
 Autocomplete-
