@@ -8,6 +8,10 @@ A single page website that scrapes pages from [Danbooru](https://danbooru.donmai
 
 Meant to be used for various ( ͡° ͜ʖ ͡°) purposes
 
+## What is Danbooru?
+
+An image board consisting of pretty muchh all anime/manga/light novels related artwork present on the internet, from sites like Pixiv, Twitter, DeviantArt etc and also consists of a lot of Original Content. The artwork is both SFW and (mostly) NSFW ( ͡° ͜ʖ ͡°).
+
 ## Usage-
 
 Download the index.html from the Release Page and open it in your favourite browser  
