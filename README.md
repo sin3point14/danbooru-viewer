@@ -4,19 +4,21 @@
 ![Monogatari Sample](/images/sample2.PNG)
 
 
-A single page website that scrapes pages from (Danbooru)[https://danbooru.donmai.us/] according to a tag and allows you to view the full-sized images one by one with simple controls that I built on a ( ͡° ͜ʖ ͡°) impulse
+A single page website that scrapes pages from [Danbooru](https://danbooru.donmai.us/) according to a tag and allows you to view the full-sized images one by one with simple controls that I built on a ( ͡° ͜ʖ ͡°) impulse
 
 Meant to be used for various ( ͡° ͜ʖ ͡°) purposes
 
 ## Usage-
 
-Download the index.html from the Release Page and open it in your favourite browser
-OR
-Go to https://sin3point14.github.io/danbooru-viewer/
+Download the index.html from the Release Page and open it in your favourite browser  
+OR  
+Go to https://sin3point14.github.io/danbooru-viewer/  
 
 __NOTE__: Avoid using second method as it gives a lot of 403 errors and the images won't load, but let's say that you don't have any other option then set the Page No to Last Page and it should work.
 
 While typing the tag into the textbox saying `Enter tag here` select the __most relevant one from the autocomplete dropdown__.
+
+![Monogatari Autocomplete Sample](/images/sample1.PNG)
 
 #### Desktop- 
 Left/Right arrow keys to go to previous/next image
@@ -24,7 +26,10 @@ Left/Right arrow keys to go to previous/next image
 #### Touch Devices- 
 Left/Right swipe to go to next/previous image
 
-Page number(of the corresponding page on danbooru of the image, format- https://danbooru.donmai.us/posts?page=PAGENO&tags=CURRENTTAG) and Image number(0 indexed image number of the current image on the correspoinding page on danbooru) can be directly controlled from the interface provided in the navbar so you don't have to start from the same image everytime.
+Control `Current Image No` and `Current Page No` using the UI  
+They correspond to-
+
+![Monogatari variables explaination](/images/usage1.PNG)
 
 __Tip__: Try putting some random numbers in the `Current Page no`(within limits please, as I have not implemented proper error-checking) for a brand new ( ͡° ͜ʖ ͡°) experiences everytime
 
@@ -33,10 +38,10 @@ __NOTE__: Last Page will diaplay incorrect for tags with hell lot of images, aga
 
 ## Wanna Contribute?
 
-Don't.
-The codebase is a nightmare of CSS, JS, Bootstrap currently with snippets from all over the internet bound by very fragile code.
-I had a ( ͡° ͜ʖ ͡°) impulse and then built it, what else could you expect?
-Unless, you are a masochist, then feel free to make my life easier by opening up a pull request 
+Don't.  
+The codebase is a nightmare of CSS, JS, Bootstrap currently with snippets from all over the internet bound by very fragile code.  
+I had a ( ͡° ͜ʖ ͡°) impulse and then built it, what else could you expect?  
+Unless, you are a masochist, then feel free to make my life easier by opening up a pull request  
 
 ## Milestones
 
@@ -47,12 +52,7 @@ Unless, you are a masochist, then feel free to make my life easier by opening up
 
 - [ ] shift to Vue.js to escape vanilla hell
 
-## Screenshots-
-
-
-Autocomplete-
-
-![Monogatari Autocomplete Sample](/images/sample1.PNG)
+## Mobile Screenshots-
 
 
 Mobile View-
