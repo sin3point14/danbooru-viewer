@@ -15,6 +15,7 @@
 
         body {
             font: 16px Arial;
+            min-height: 100vh;
         }
 
         .autocomplete {
@@ -71,8 +72,17 @@
 
         img {
             display: block;
-            max-height: 100vh;
-            max-width: 100vw;
+            max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: -1 ;
         }
 
         #expt {
@@ -95,7 +105,7 @@
             <ul class="navbar-nav mr-auto">
                 <!--<li class="nav-item">
                     <div class="autocomplete" style="width:300px;">
-                        <input class="form-control" id="myInput" type="text" name="myCountry" placeholder="enter tag here">
+                        <input class="form-control" id="myInput" type="text" name="myCountry" placeholder="Enter tag here">
                     </div>
                 </li>
                 <li class="nav-item">
@@ -127,7 +137,7 @@
             <div class="form-inline my-2 my-lg-0">
                 <span class="autocomplete">
                     <input class="form-control" id="myInput" type="text" name="myCountry"
-                        placeholder="enter tag here">
+                        placeholder="enter tag here" style="width: 300px;">
                 </span>
                 <button class="btn btn-outline-success ml-2" onclick="pre_search()" type="submit">Search</button>
 
