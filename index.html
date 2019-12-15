@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>
         Danbooru-Viewer
     </title>
@@ -28,7 +29,7 @@
 
         input[type=text] {
             background-color: #f1f1f1;
-            width: 100%;
+            width: 300px;
         }
 
         input[type=submit] {
@@ -76,10 +77,15 @@
 
 <body>
     <div class="autocomplete" style="width:300px;">
-        <input id="myInput" type="text" name="myCountry" placeholder="Country">
+        <input id="myInput" type="text" name="myCountry" placeholder="enter tag here">
     </div>
 
-    <button onclick="search()" type="submit">Search</button>
+    <button onclick="pre_search()" type="submit">Search</button>
+<span>Last Page No- <span id = 'lastpage'>unset</span>; Last Image No- <span id = 'lastimage'>unset</span></span>
+<input type="text" id = 'pageno' value="1">
+<input type="text" id = 'imgno' value="0">
+
+
     <img id="image">
     <script>
         function httpGetAsync(theUrl) {
@@ -231,7 +237,16 @@
         document.addEventListener("click", function (e) {
             closeAllLists(e.target);
         });
+
+        function pre_search(){
+            update_numbers()
+            search()
+        }
         function loadImage(html) {
+            document.getElementById('lastpage').innerHTML = lastpage
+            document.getElementById('lastimage').innerHTML = lastimage
+            document.getElementById('imgno').value = imgno
+            document.getElementById('pageno').value = pageno
             var _img = document.getElementById('image');
             var newImg = new Image;
             newImg.onload = function () {
@@ -247,12 +262,37 @@
         var page
         var searchexeccheck = false
 
+        function update_numbers(update_value){
+            let temp_imgno = parseInt(document.getElementById('imgno').value)
+            let temp_pageno = parseInt(document.getElementById('pageno').value)
+            console.log(temp_pageno, temp_imgno, pageno, imgno) 
+            if(isNaN(temp_imgno))
+            {
+                window.alert('image no is not a number')
+                return
+            }
+            if(isNaN(temp_pageno))
+            {
+                window.alert('page no is not a number')
+                return
+            }
+            if(temp_imgno != imgno)
+            {
+                imgno = temp_imgno
+            }
+            if(temp_pageno != pageno)
+            {
+                pageno = temp_pageno
+            }
+            console.log(temp_pageno, temp_imgno, pageno, imgno)
+        }
         function prev_img() {
+            update_numbers()
             console.log(imgno)
             if (imgno > 0) {
                 imgno--
                 loadImage(page)
-                console.log("laya image", imgno, pageno)
+                console.log("laya image", pageno, imgno)
             }
             else if (pageno > 1) {
                 pageno--
@@ -263,10 +303,11 @@
             }
         }
         function next_img() {
+            update_numbers()
             if (imgno < lastimage) {
                 imgno++
                 loadImage(page)
-                console.log("laya image", imgno, pageno)
+                console.log("laya image", pageno, imgno)
             }
             else if (pageno < lastpage) {
                 pageno++
